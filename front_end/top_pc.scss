@@ -31,7 +31,7 @@ header {
     background-color: $title_gray;
     
     .header-container{
-        width:1100px;
+        width:1024px;
         height:80px;
         margin: 0 auto;
         display: flex;
@@ -104,18 +104,9 @@ footer {
 }
 
 .container {
-    width:1100px;
-    margin:0 auto 0 auto;
+    width:95%;
+    margin:30px auto 0 auto;
     overflow: auto;
-
-        h1 {
-            font-size:3.0rem;
-            height:60px;
-            line-height:60px;
-            text-align: center;
-            margin:10px auto 10px auto;
-            background-color: $title_gray;
-        }
 
     .container-senctions {
         float: right;
@@ -124,8 +115,9 @@ footer {
         .container-sections-one{
             display:flex;
             flex-wrap: wrap;
+            justify-content: space-between;
 
-            h2 {
+            h1 {
                 font-size: 3.0rem;
                 height:50px;
                 line-height:50px;
@@ -137,8 +129,9 @@ footer {
 
             .container-sections-one-movie{
                 width:23%;
+                min-width:190px;
                 height:auto;
-                margin:1%;
+                margin:10px 0 10px 0;
                 position: relative;
                 overflow: hidden;
                 background-color: $contents_gray;
@@ -153,7 +146,7 @@ footer {
                     width:100%;
                 }
 
-                h3{
+                h2{
                     width:100%;
                     padding: 5px 0;
                     margin:5px 0;
@@ -195,7 +188,7 @@ footer {
         .contaier-side-category{
             width:100%;
 
-            & > h2{
+            & > h1{
                 font-size:2.5rem;
                 margin:0;
                 padding: 5px;
