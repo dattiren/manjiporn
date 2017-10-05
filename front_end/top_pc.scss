@@ -4,6 +4,12 @@ $font_family:'Nunito', sans-serif;
 $background_color:black;
 $contents_gray:#101010;
 
+$tablet-size:1024px;
+@mixin tablet($tablet-size) {
+    @media screen and (max-width: $tablet-size) {
+      @content;
+    }
+  }
 
 html {
     width: 100%;
@@ -35,28 +41,42 @@ header {
         height:80px;
         margin: 0 auto;
         display: flex;
+        @include tablet($tablet-size) {
+            width:100%;
+        }
 
         .header-container-logo{
+            display: flex;
+            align-items: center;
+            @include tablet($tablet-size) {
+                width:30%;
+            }
             img{
                 width:300px;
-                margin-top:5px;
+                @include tablet($tablet-size) {
+                    width:100%;
+                }
             }
         }
 
         .header-container-searchform {
-            width:400px;
+            width:380px;
             margin-top:10px;
             margin-left:20px;
             position: relative;
 
             input[type="text"]{
-                width:400px;
+                width:380px;
                 height:50px;
                 right:0;
                 border:none;
                 border-radius: 10px;
                 position:absolute;
                 font-size: 2.0rem;
+                @include tablet($tablet-size) {
+                    width:100%;
+                    font-size: 1.4rem;
+                }
             }
 
             button[type="submit"]{
@@ -69,6 +89,10 @@ header {
                 background-color: #fff;
                 border:none;
                 background-size: cover;
+                @include tablet($tablet-size) {
+                    width:8%;
+                    font-size: 1.4rem;
+                }
 
             }
         }
@@ -77,13 +101,17 @@ header {
             display: flex;
             align-items: center;
             justify-content: center;
-            width:148px;
+            width:140px;
             height:80px;
             border-left: 1px solid #5a5a5a;
             text-decoration: none;
             color:$font_color;
             text-align: center;
             font-size: 2.0rem;
+            @include tablet($tablet-size) {
+                width:10%;
+                font-size: 1.4rem;
+            }
         }
 
         .header-container-create{
@@ -115,7 +143,7 @@ footer {
         .container-sections-one{
             display:flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: space-around;
 
             h1 {
                 font-size: 3.0rem;
@@ -128,13 +156,16 @@ footer {
             }
 
             .container-sections-one-movie{
-                width:23%;
-                min-width:190px;
+                width:22.5%;
+                min-width:170px;
                 height:auto;
                 margin:10px 0 10px 0;
                 position: relative;
                 overflow: hidden;
                 background-color: $contents_gray;
+                @include tablet($tablet-size) {
+                    width:32%;
+                }
 
                 img{
                     height:150px;
@@ -193,6 +224,9 @@ footer {
                 margin:0;
                 padding: 5px;
                 background-color: $title_gray;
+                @include tablet($tablet-size) {
+                    font-size:1.7rem;
+                }
             }
 
             ul{
@@ -205,6 +239,9 @@ footer {
                     padding:10px 0;
                     font-size:2.5rem;
                     border-bottom: 1px solid #5b5b5b;
+                    @include tablet($tablet-size) {
+                        font-size:1.7rem;
+                    }
 
                     i{
                         margin:0 5px;
@@ -227,4 +264,7 @@ footer {
     height:200px;
     margin:50px auto;
     background-color: gray;
+    @include tablet($tablet-size) {
+        width:100%;
+    }
 }
