@@ -23,7 +23,7 @@ class CreateMoviesTable extends Migration
     public function up()
     {
         Schema::create('movies', function (Blueprint $table) {
-            $table->increments('id');
+            $table->mediumIncrements('id');
             $table->string('title', 255);
             $table->string('url', 255);
             $table->integer('played_count')

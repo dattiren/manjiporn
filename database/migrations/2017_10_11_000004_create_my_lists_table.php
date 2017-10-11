@@ -27,6 +27,8 @@ class CreateMyListsTable extends Migration
             $table->mediumInteger('movie_id')
                     ->unsigned();
             $table->timestamps();
+        });
+        Schema::table('my_lists', function (Blueprint $table) {
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users');
