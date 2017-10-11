@@ -2,9 +2,11 @@
 # すべてから無修正タグ、タイトルを除く
 # 詳細画面へ遷移し、そのページのリザーブurlを取得して保存
 
-# pip install mysqlclient
-import MySQLdb
+
+import MySQLdb                  # pip install mysqlclient
+from bs4 import BeautifulSoup   # pip instal beautifulsoup4
 import setting as Setting
+import urllib.request
 
 
 def db_conect():
