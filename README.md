@@ -14,7 +14,6 @@ cp .env.example .env
 ```
 
 .envの下記部分を自分のDB用に変更
-マイグレーション前にデータベースを先に作成しておく！
 
 ```
 DB_CONNECTION=mysql
@@ -26,7 +25,9 @@ DB_USERNAME=root
 ```
 
 ### マイグレーション
-下記コマンドでテーブルを作成
+マイグレーション前にデータベースを先に作成しておく！  
+manjiporn直下で下記コマンドを実行しテーブルを作成  
+php artisanコマンドはmanjiporn直下じゃなきゃ動かないよ
 
 ```
 php artisan migrate
