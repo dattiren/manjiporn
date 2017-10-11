@@ -22,9 +22,9 @@ class CreatePlayHistories extends Migration
     {
         Schema::create('play_histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->mediumIntegers('user_id')
+            $table->mediumInteger('user_id')
                     ->unsigned();
-            $table->mediumIntegers('movie_id')
+            $table->mediumInteger('movie_id')
                     ->unsigned();
             $table->timestamps();
             $table->foreign('user_id')
