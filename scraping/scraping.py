@@ -1,7 +1,3 @@
-# ますたべ
-# すべてから無修正タグ、タイトルを除く
-# 詳細画面へ遷移し、そのページのリザーブurlを取得して保存
-
 from time import sleep
 import MySQLdb                  # pip install mysqlclient
 from bs4 import BeautifulSoup   # pip instal beautifulsoup4
@@ -55,6 +51,10 @@ def masutabe_scraiping():
 
         # h2タグ内にあるaタグを抽出
         h2_tags = [h2.find('a') for h2 in soup.find_all('h2') if h2.find('a') is not None]
+
+        # h2タグが存在しない(動画がない)場合に抜ける
+        if len(h2_tags) == 0:
+            break
 
         # aタグのhref属性を抽出
         video_urls = [a.attrs['href'] for a in h2_tags]
