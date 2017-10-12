@@ -91,7 +91,12 @@ def masutabe_detail_scraiping(video_urls):
             soup = BeautifulSoup(html, 'html.parser')
 
         movie_url = soup.find('iframe').attrs['src']
-        movie_title = [movie_title for movie_title in soup.find_all('h1') if movie_title.text != ''][0]
+        movie_tags = soup.select('ul.tag_list')[0]
+        movie_title = [movie_title.text for movie_title in soup.find_all('h1') if movie_title.text != ''][0]
+
+        # 無修正かをタグとタイトルから判断
+        if '無修正' in movie_tags.text or '無修正' in movie_title:
+            continue
 
         movie_url_and_title.append({'title': movie_title, 'url': movie_url})
         print(movie_url_and_title)
