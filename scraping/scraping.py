@@ -6,7 +6,7 @@ import urllib.request
 import random
 import math
 import urllib
-from selenium import webdriver
+from selenium import webdriver  # pip install selenium
 
 
 def db_conect():
