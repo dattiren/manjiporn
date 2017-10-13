@@ -5,6 +5,8 @@ import setting as Setting
 import urllib.request
 import random
 import math
+import urllib
+from selenium import webdriver
 
 
 def db_conect():
@@ -77,6 +79,7 @@ def masutabe_detail_scraiping(video_urls):
 
     :param   video_urls: 動画詳細のURL(マスタベ内)
     :type    video_urls: list
+
     :return: 動画URLとタイトルのdict配列
     :rtype:  list
     """
@@ -106,6 +109,94 @@ def masutabe_detail_scraiping(video_urls):
     return movie_url_and_title
 
 
+def share_videos_scraiping():
+    """
+    share_videosのスクレイピングを実行して、データベースへ動画URLとタイトルを保存する
+    """
+
+    page_count = 1
+
+    # TODO 何ページ先まで読み取るかを話し合いにて決定する
+    while True:
+        if TEST_FLAG:
+            if page_count > 1:
+                break
+
+            soup = BeautifulSoup(open('html/sharevideos_all.html'), 'html.parser')
+        else:
+            url = 'http://share-videos.se/view/new?uid=13&page=' + str(page_count)
+            html = urllib.request.urlopen(url)
+            soup = BeautifulSoup(html, 'html.parser')
+
+        articles = soup.select('article.col-sm-3.video_post.postType1')
+
+        # articlesタグが存在しない(動画がない)場合に抜ける
+        if len(articles) == 0:
+            break
+
+        video_urls = [a.find('a').attrs['href'] for a in articles]
+
+        share_videos_detail_scraiping(video_urls)
+
+        page_count += 1
+
+
+def share_videos_detail_scraiping(video_urls):
+    """
+    share videosの動画詳細ページから、動画URLとタイトルを抽出する
+
+    :param    video_urls: 動画詳細のURL(share videos内)
+    :type     list
+
+    :return:  動画URLとタイトルのdict配列
+    :rtype:   list
+    """
+    movie_url_and_title = []
+
+    for video_url in video_urls:
+        if TEST_FLAG:
+            soup = BeautifulSoup(open('html/sharevideos_detail.html'), 'html.parser')
+
+            video_tags = soup.select('#video_tag a')
+            movie_url = soup.select('#video_tag a')[-1].attrs['href']
+
+            # if 'youtube.com' in movie_url:
+            #     continue
+
+            # mushusei = [tag for tag in video_tags if '無修正' in tag.text]
+            # print(mushusei)
+
+            movie_title = ' '.join(([str(video_tag.text) for i, video_tag in enumerate(video_tags) if i != len(video_tags)-1]))
+        else:
+            target_url = 'http://share-videos.se' + video_url
+
+            driver = webdriver.PhantomJS()
+            driver.get(target_url)
+
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            video_tags = soup.select('#video_tag a')
+
+            # 無修正タグが含まれていたら処理をスキップ
+            mushusei = [tag for tag in video_tags if '無修正' in tag.text]
+            if len(mushusei) != 0:
+                continue
+
+            if len(video_tags) == 0:
+                continue
+            else:
+                movie_url = video_tags[-1].attrs['href']
+
+                # リンク先がyoutubeなら処理をスキップ
+                if 'youtube.com' in movie_url:
+                    continue
+
+                movie_title = ' '.join(([str(video_tag.text) for i, video_tag in enumerate(video_tags) if i != len(video_tags) - 1]))
+
+        movie_url_and_title.append({'title': movie_title, 'url': movie_url})
+
+    return movie_url_and_title
+
+
 def get_random_int(min_sec, max_sec):
     """
     指定したmin_secからmax_secまでの値をランダムに返す
@@ -114,6 +205,7 @@ def get_random_int(min_sec, max_sec):
     :type  min_sec: int
     :param max_sec: 生成したい最大値
     :type  max_sec: int
+
     :return:        指定した範囲のランダム値
     :rtype:         int
     """
@@ -121,7 +213,8 @@ def get_random_int(min_sec, max_sec):
 
 
 def main():
-    masutabe_scraiping()
+    # masutabe_scraiping()
+    share_videos_scraiping()
     # connect, cursor = db_conect()
     # db_close(connect, cursor)
 
