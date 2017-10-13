@@ -11,5 +11,8 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
+    $router->resource('crud/users', UserController::class);
+    $router->resource('crud/movies', MovieController::class);
+    $router->resource('crud/categories', CategoryController::class);
 
 });
