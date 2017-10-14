@@ -29,8 +29,14 @@ def db_close(connect, cursor):
 
 
 def save_data(movie_url_and_title):
-    # TODO 受け取ったurlとタイトルを保存する関数の実装
-    pass
+    connect, cursor = db_conect()
+
+    for url_title_obj in movie_url_and_title:
+        cursor.execute('INSERT INTO movies(title, url, play_count) VALUES(%s, %s, %s)', (url_title_obj['title'], url_title_obj['url'], 0))
+
+    connect.commit()
+
+    db_close(connect, cursor)
 
 
 def masutabe_scraiping():
@@ -136,7 +142,9 @@ def share_videos_scraiping():
 
         video_urls = [a.find('a').attrs['href'] for a in articles]
 
-        share_videos_detail_scraiping(video_urls)
+        movie_url_and_title = share_videos_detail_scraiping(video_urls)
+
+        save_data(movie_url_and_title)
 
         page_count += 1
 
@@ -213,10 +221,8 @@ def get_random_int(min_sec, max_sec):
 
 
 def main():
-    # masutabe_scraiping()
+    masutabe_scraiping()
     share_videos_scraiping()
-    # connect, cursor = db_conect()
-    # db_close(connect, cursor)
 
 
 if __name__ == '__main__':
