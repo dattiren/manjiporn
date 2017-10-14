@@ -29,6 +29,13 @@ def db_close(connect, cursor):
 
 
 def save_data(movie_url_and_title):
+    """
+    動画URLとタイトルを受け取って保存を行う
+
+    :param  movie_url_and_title: 動画URLとタイトルのdictが格納された1次元配列
+    :type   list
+    """
+
     connect, cursor = db_conect()
 
     for url_title_obj in movie_url_and_title:
