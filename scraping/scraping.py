@@ -201,6 +201,7 @@ def share_videos_detail_scraiping(video_urls):
             else:
                 movie_url = video_tags[-1].attrs['href']
 
+                # TODO youtube以外にも弾いた方が良いサイトあるか検討
                 # リンク先がyoutubeなら処理をスキップ
                 if 'youtube.com' in movie_url:
                     continue
