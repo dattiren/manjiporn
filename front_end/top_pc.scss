@@ -132,9 +132,12 @@ footer {
 }
 
 .container {
-    width:95%;
+    width:75%;
     margin:30px auto 0 auto;
     overflow: auto;
+    @include tablet($tablet-size) {
+        width:100%;
+    }
 
     .container-senctions {
         float: right;
@@ -156,8 +159,7 @@ footer {
             }
 
             .container-sections-one-movie{
-                width:22.5%;
-                min-width:170px;
+                width:200px;
                 height:auto;
                 margin:10px 0 10px 0;
                 position: relative;
