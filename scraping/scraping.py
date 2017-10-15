@@ -73,15 +73,18 @@ def masutabe_scraiping():
 
         # aタグのhref属性を抽出
         video_urls = [a.attrs['href'] for a in h2_tags]
+
         print(video_urls)
 
-        sleep(get_random_int(5, 10))
+        sleeping()
 
         movie_url_and_title = masutabe_detail_scraiping(video_urls)
 
         save_data(movie_url_and_title)
 
-        sleep(get_random_int(5, 10))
+        sleeping()
+
+        print('page ' + str(page_count) + ' is done.')
 
         page_count += 1
 
@@ -115,9 +118,10 @@ def masutabe_detail_scraiping(video_urls):
             continue
 
         movie_url_and_title.append({'title': movie_title, 'url': movie_url})
+
         print(movie_url_and_title)
 
-        sleep(get_random_int(5, 10))
+        sleeping()
 
     return movie_url_and_title
 
@@ -137,8 +141,13 @@ def share_videos_scraiping():
 
             soup = BeautifulSoup(open('html/sharevideos_all.html'), 'html.parser')
         else:
-            url = 'http://share-videos.se/view/new?uid=13&page=' + str(page_count)
-            html = urllib.request.urlopen(url)
+            url = 'http://share-videos.se/view/new?uid=1&page=' + str(page_count)
+            headers = {
+                "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0",
+            }
+            request = urllib.request.Request(url=url, headers=headers)
+            html = urllib.request.urlopen(request)
+
             soup = BeautifulSoup(html, 'html.parser')
 
         articles = soup.select('article.col-sm-3.video_post.postType1')
@@ -149,9 +158,15 @@ def share_videos_scraiping():
 
         video_urls = [a.find('a').attrs['href'] for a in articles]
 
+        sleeping()
+
         movie_url_and_title = share_videos_detail_scraiping(video_urls)
 
         save_data(movie_url_and_title)
+
+        sleeping()
+
+        print('page ' + str(page_count) + ' is done.')
 
         page_count += 1
 
@@ -185,10 +200,9 @@ def share_videos_detail_scraiping(video_urls):
         else:
             target_url = 'http://share-videos.se' + video_url
 
-            driver = webdriver.PhantomJS()
-            driver.get(target_url)
+            web_driver.get(target_url)
 
-            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            soup = BeautifulSoup(web_driver.page_source, 'html.parser')
             video_tags = soup.select('#video_tag a')
 
             # 無修正タグが含まれていたら処理をスキップ
@@ -210,6 +224,8 @@ def share_videos_detail_scraiping(video_urls):
 
         movie_url_and_title.append({'title': movie_title, 'url': movie_url})
 
+        sleeping()
+
     return movie_url_and_title
 
 
@@ -228,11 +244,21 @@ def get_random_int(min_sec, max_sec):
     return math.floor(random.random() * (max_sec - min_sec + 1)) + min_sec
 
 
+def sleeping():
+    """
+    sleepを実行しつつメッセージも表示する
+    """
+    print('sleeping')
+    sleep(get_random_int(5, 10))
+    print('finish sleep')
+
+
 def main():
-    masutabe_scraiping()
+    # masutabe_scraiping()
     share_videos_scraiping()
 
 
 if __name__ == '__main__':
-    TEST_FLAG = True
+    web_driver = webdriver.PhantomJS()
+    TEST_FLAG = False
     main()
