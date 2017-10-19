@@ -12,6 +12,7 @@ $phone-size:767px;
         @content;
     }
 }
+
 @mixin phone($phone-size) {
     @media screen and (max-width: $phone-size) {
         @content;
@@ -54,7 +55,7 @@ header {
             @include tablet($tablet-size) {
                 width: 30%;
             }
-            @include phone($phone-size){
+            @include phone($phone-size) {
                 width: 45%;
             }
             img {
@@ -69,7 +70,7 @@ header {
             margin-top: 10px;
             margin-left: 20px;
             position: relative;
-            @include phone($phone-size){
+            @include phone($phone-size) {
                 width: 50%;
             }
             input[type="text"] {
@@ -116,7 +117,7 @@ header {
                 width: 10%;
                 font-size: 1.4rem;
             }
-            @include phone($phone-size){
+            @include phone($phone-size) {
                 display: none;
             }
         }
@@ -141,24 +142,27 @@ footer {
     overflow: auto;
     @include tablet($tablet-size) {
         width: 100%;
-    } 
-    @include phone($phone-size){
+    }
+    @include phone($phone-size) {
         display: flex;
         flex-direction: column;
-        margin:0;
-    }
-    //topページのCSS
+        margin: 0;
+    } //topページのCSS
     .container-senctions {
         float: right;
         width: 80%;
-        @include phone($phone-size){
+        @include phone($phone-size) {
             order: 2;
-            width:100%;
+            width: 100%;
         }
         .container-sections-one {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
+            @include phone($phone-size) {
+                margin-top: 10px;
+                justify-content: flex-start;
+            }
             h1 {
                 font-size: 3.0rem;
                 height: 50px;
@@ -167,6 +171,15 @@ footer {
                 margin: 0;
                 text-align: center;
                 background-color: $title_gray;
+                @include phone($phone-size) {
+                    background-color: $title_gray_phone;
+                    font-size: 1.5rem;
+                    width: auto;
+                    padding: 5px;
+                    line-height: normal;
+                    height: auto;
+                    text-align: left;
+                }
             }
             .container-sections-one-movie {
                 width: 200px;
@@ -181,39 +194,47 @@ footer {
                 @include phone($phone-size) {
                     width: 100%;
                     background-color: $title_gray_phone;
+                    padding: 3px;
+                    margin: 0 0 10px 0;
                 }
-
                 img {
                     height: 150px;
                     @include phone($phone-size) {
                         height: auto;
-                        width:40%;
-                        float:left;
-                        margin-top:5%;
-                        margin-bottom:5%;
+                        width: 40%;
+                        float: left;
                     }
                 }
-
-                .container-sections-one-movie-info{
+                .container-sections-one-movie-info {
                     height: auto;
-                    width:100%;
+                    width: 100%;
                     @include phone($phone-size) {
-                        width:55%;
-                        float:left;
+                        width: 59%;
+                        height: 95%;
+                        font-size: 1.3rem;
+                        float: left;
                     }
-                    h2 {
-                        width: 100%;
-                        padding: 5px 0;
-                        margin: 5px 0;
-                        font-size: 1.5rem;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        -o-text-overflow: ellipsis;
-                        @include phone($phone-size) {
-                            margin:0;
-                            padding: 5px;
-                            font-size:1.3rem;
+                    .container-sections-one-movie-info-link {
+                        display: block;
+                        h2 {
+                            width: 100%;
+                            padding: 5px 0;
+                            margin: 5px 0;
+                            font-size: 1.5rem;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            -o-text-overflow: ellipsis;
+                            @include phone($phone-size) {
+                                margin: 0;
+                                padding-left: 5px;
+                                font-size: 1.3rem;
+                                height: 33px;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2;
+                                white-space: normal;
+                            }
                         }
                     }
                     .container-sections-one-movie-category {
@@ -222,23 +243,29 @@ footer {
                         border-top: 1px solid #5b5b5b;
                         border-bottom: 1px solid #5b5b5b;
                         @include phone($phone-size) {
-                            border-top: none;
-                            border-bottom: none;
+                            display: none;
                         }
-                        span {
+                        a {
                             margin: 5px;
                             padding: 5px;
                             background: #303030;
                             color: #afafaf;
                             border-radius: 20px;
                             @include phone($phone-size) {
-                                background-color:$title_gray;
+                                background-color: $title_gray;
+                                margin: 1px 3px;
                             }
                         }
                     }
                     .container-sections-one-movie-infomation {
                         padding: 10px 0;
                         margin: 0 5px;
+                        @include phone($phone-size) {
+                            margin: 0;
+                            padding: 5px;
+                            position: absolute;
+                            bottom: 0;
+                        }
                     }
                 }
             }
@@ -249,10 +276,10 @@ footer {
         width: 18%;
         margin-right: 2%;
         background-color: $contents_gray;
-        @include phone($phone-size){
+        @include phone($phone-size) {
             order: 1;
-            width:100%;
-            height:50px;
+            width: 100%;
+            height: 50px;
         }
         .contaier-side-category {
             width: 100%;
@@ -264,7 +291,7 @@ footer {
                 @include tablet($tablet-size) {
                     font-size: 1.7rem;
                 }
-                @include phone($phone-size){
+                @include phone($phone-size) {
                     display: none;
                 }
             }
@@ -273,10 +300,10 @@ footer {
                 list-style: none;
                 padding: 0;
                 margin-top: 0;
-                @include phone($phone-size){
-                white-space: nowrap;    
-                overflow: scroll;      
-                border-bottom: 1px solid #5b5b5b;          
+                @include phone($phone-size) {
+                    white-space: nowrap;
+                    overflow: scroll;
+                    border-bottom: 1px solid #5b5b5b;
                 }
                 li {
                     width: 100%;
@@ -285,12 +312,12 @@ footer {
                     border-bottom: 1px solid #5b5b5b;
                     @include tablet($tablet-size) {
                         font-size: 1.7rem;
-                        margin:7px; 
+                        margin: 7px;
                     }
-                    @include phone($phone-size){
+                    @include phone($phone-size) {
                         display: inline-block;
                         width: 100px;
-                        border:none;   
+                        border: none;
                         background-color: $title_gray_phone;
                         text-align: center;
                         border-radius: 30px;
@@ -298,8 +325,8 @@ footer {
                     }
                     i {
                         margin: 0 5px;
-                        @include phone($phone-size){
-                            display: none;                
+                        @include phone($phone-size) {
+                            display: none;
                         }
                     }
                 }
@@ -310,7 +337,7 @@ footer {
             height: 400px;
             margin-top: 30px;
             background-color: gray;
-            @include phone($phone-size){
+            @include phone($phone-size) {
                 display: none;
             }
         }
@@ -328,9 +355,8 @@ footer {
         height: 500px;
         overflow: scroll;
         background-color: $title_gray;
-
-        p{
-            font-size:1.5rem;
+        p {
+            font-size: 1.5rem;
         }
     }
 }
