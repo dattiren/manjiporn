@@ -39,6 +39,7 @@ def save_data(movie_url_and_title):
     connect, cursor = db_conect()
 
     for url_title_obj in movie_url_and_title:
+        # TODO DB設計が済んだのちに、カラム名を修正
         cursor.execute('INSERT INTO movies(title, url, play_count) VALUES(%s, %s, %s)', (url_title_obj['title'], url_title_obj['url'], 0))
 
     connect.commit()
