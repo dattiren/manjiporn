@@ -52,7 +52,6 @@ def masutabe_scraiping():
     """
     page_count = 1
 
-    # TODO 何ページ先まで読み取るかを話し合いにて決定する
     while True:
         if TEST_FLAG:
             if page_count > 1:
@@ -60,6 +59,8 @@ def masutabe_scraiping():
 
             soup = BeautifulSoup(open('html/masutabe_all.html'), 'html.parser')
         else:
+            if page_count > 11:
+                break
             url = 'https://masutabe.info/all/?p=' + str(page_count)
             html = urllib.request.urlopen(url)
             soup = BeautifulSoup(html, 'html.parser')   # lxmlやhtml5libがインストールされている場合はそっちが優先されるので明示的に指定
@@ -133,7 +134,6 @@ def share_videos_scraiping():
 
     page_count = 1
 
-    # TODO 何ページ先まで読み取るかを話し合いにて決定する
     while True:
         if TEST_FLAG:
             if page_count > 1:
@@ -141,6 +141,9 @@ def share_videos_scraiping():
 
             soup = BeautifulSoup(open('html/sharevideos_all.html'), 'html.parser')
         else:
+            if page_count > 21:
+                break
+
             url = 'http://share-videos.se/view/new?uid=1&page=' + str(page_count)
             headers = {
                 "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0",
@@ -176,7 +179,7 @@ def share_videos_detail_scraiping(video_urls):
     share videosの動画詳細ページから、動画URLとタイトルを抽出する
 
     :param    video_urls: 動画詳細のURL(share videos内)
-    :type     list
+    :type     video_urls: list
 
     :return:  動画URLとタイトルのdict配列
     :rtype:   list
@@ -215,9 +218,8 @@ def share_videos_detail_scraiping(video_urls):
             else:
                 movie_url = video_tags[-1].attrs['href']
 
-                # TODO youtube以外にも弾いた方が良いサイトあるか検討
-                # リンク先がyoutubeなら処理をスキップ
-                if 'youtube.com' in movie_url:
+                # リンク先がyoutubeもしくはfc2なら処理をスキップ
+                if 'youtube.com' in movie_url or 'fc2.com' in movie_url:
                     continue
 
                 movie_title = ' '.join(([str(video_tag.text) for i, video_tag in enumerate(video_tags) if i != len(video_tags) - 1]))
