@@ -225,6 +225,71 @@ def share_videos_detail_scraiping(video_urls):
     return movie_url_and_title
 
 
+def kyonyudouga_stream_scraping():
+    """
+    巨乳動画ストリームのスクレイピングを実行して、データベースへ動画URLとタイトルを保存する
+    """
+
+    page_count = 1
+
+    while True:
+        if TEST_FLAG:
+            if page_count > 1:
+                break
+
+            soup = get_soup('html/kyonyu_all.html')
+        else:
+            if page_count > 6:
+                break
+
+            soup = get_soup('http://kyonyudouga.com/page/' + str(page_count))
+
+        posts = soup.find_all('div', class_="posts")
+        a_tags = [post.find('a') for post in posts]
+
+        movie_titles = [a.attrs['title'] for a in a_tags]
+        movie_urls = [a.attrs['href'] for a in a_tags]
+
+        sleeping()
+
+        movie_origin_urls = kyonyudouga_stream_detail_scraping(movie_urls)
+        movie_url_and_title = [{'title': movie_title, 'url': movie_url} for movie_title, movie_url in zip(movie_titles, movie_origin_urls)]
+
+        save_data(movie_url_and_title)
+
+        sleeping()
+
+        print('page ' + str(page_count) + ' is done.')
+
+        page_count += 1
+
+
+def kyonyudouga_stream_detail_scraping(video_urls):
+    """
+   巨乳動画ストリームの動画詳細ページから、動画URLを抽出する
+
+   :param    video_urls: 動画詳細のURL(share videos内)
+   :type     video_urls: list
+
+   :return:  動画URLの配列
+   :rtype:   list
+   """
+
+    movie_urls = []
+
+    for video_url in video_urls:
+        if TEST_FLAG:
+            soup = get_soup('html/kyonyu_detail.html')
+        else:
+            soup = get_soup(video_url)
+
+        movie_urls.append(soup.find('iframe').attrs['src'])
+
+        # sleeping()
+
+    return movie_urls
+
+
 def get_soup(url):
     """
     指定されたurlのsoupオブジェクトを返す関数
@@ -277,10 +342,11 @@ def sleeping():
 
 def main():
     # masutabe_scraiping()
-    share_videos_scraiping()
+    # share_videos_scraiping()
+    kyonyudouga_stream_scraping()
 
 
 if __name__ == '__main__':
     web_driver = webdriver.PhantomJS()
-    TEST_FLAG = False
+    TEST_FLAG = True
     main()
