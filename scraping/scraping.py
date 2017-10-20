@@ -290,6 +290,30 @@ def kyonyudouga_stream_detail_scraping(video_urls):
     return movie_urls
 
 
+def pornhub_scraping():
+    # TODO view数が5万以上のみスクレイピング
+    """
+    pornhubのスクレイピングを実行して、データベースへ動画URLとタイトルを保存する
+    """
+
+    page_count = 1
+
+    while True:
+        if TEST_FLAG:
+            if page_count > 1:
+                break
+
+            soup = get_soup('html/pornhub_all.html')
+        else:
+            if page_count > 6:
+                break
+
+            soup = get_soup('http://kyonyudouga.com/page/' + str(page_count))
+
+
+        page_count += 1
+
+
 def get_soup(url):
     """
     指定されたurlのsoupオブジェクトを返す関数
