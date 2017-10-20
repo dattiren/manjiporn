@@ -7,6 +7,7 @@ import random
 import math
 import urllib
 from selenium import webdriver  # pip install selenium
+import html
 
 
 def db_conect():
@@ -158,6 +159,8 @@ def share_videos_scraiping():
 
         movie_url_and_title = share_videos_detail_scraiping(video_urls)
 
+        print(movie_url_and_title)
+
         save_data(movie_url_and_title)
 
         sleeping()
@@ -187,12 +190,6 @@ def share_videos_detail_scraiping(video_urls):
             video_tags = soup.select('#video_tag a')
             movie_url = soup.select('#video_tag a')[-1].attrs['href']
 
-            # if 'youtube.com' in movie_url:
-            #     continue
-
-            # mushusei = [tag for tag in video_tags if '無修正' in tag.text]
-            # print(mushusei)
-
             movie_title = ' '.join(([str(video_tag.text) for i, video_tag in enumerate(video_tags) if i != len(video_tags)-1]))
         else:
             target_url = 'http://share-videos.se' + video_url
@@ -205,16 +202,23 @@ def share_videos_detail_scraiping(video_urls):
             # 無修正タグが含まれていたら処理をスキップ
             mushusei = [tag for tag in video_tags if '無修正' in tag.text]
             if len(mushusei) != 0:
+                print('mushusei skip')
                 continue
 
             if len(video_tags) == 0:
+                print('video_tags is 0 skip')
                 continue
             else:
                 movie_url = video_tags[-1].attrs['href']
 
-                # リンク先がyoutubeもしくはfc2なら処理をスキップ
+                # リンク先がyoutubeもしくはfc2なら処理をスキップ、javynowはそのまま、それ以外は個別に取得処理を実施
                 if 'youtube.com' in movie_url or 'fc2.com' in movie_url:
+                    print('youtube.com or fc2.com skip')
                     continue
+                elif 'javynow.com' in movie_url:
+                    pass
+                else:
+                    movie_url = get_iframe_link(movie_url)
 
                 movie_title = ' '.join(([str(video_tag.text) for i, video_tag in enumerate(video_tags) if i != len(video_tags) - 1]))
 
@@ -285,13 +289,13 @@ def kyonyudouga_stream_detail_scraping(video_urls):
 
         movie_urls.append(soup.find('iframe').attrs['src'])
 
-        # sleeping()
+        sleeping()
 
     return movie_urls
 
 
+# TODO view数が5万以上のみスクレイピング
 def pornhub_scraping():
-    # TODO view数が5万以上のみスクレイピング
     """
     pornhubのスクレイピングを実行して、データベースへ動画URLとタイトルを保存する
     """
@@ -309,7 +313,6 @@ def pornhub_scraping():
                 break
 
             soup = get_soup('http://kyonyudouga.com/page/' + str(page_count))
-
 
         page_count += 1
 
@@ -333,9 +336,33 @@ def get_soup(url):
         }
 
         request = urllib.request.Request(url=url, headers=headers)
-        html = urllib.request.urlopen(request)
+        html_content = urllib.request.urlopen(request)
 
-        return BeautifulSoup(html, 'html.parser')
+        return BeautifulSoup(html_content, 'html.parser')
+
+
+# TODO xvideos.com
+# TODO redtube.com
+def get_iframe_link(movie_url):
+    sleeping()
+
+    soup = get_soup(movie_url)
+
+    if 'xvideos.com' in movie_url:
+        pass
+    elif 'pornhub.com' in movie_url:
+        js_data = soup.find('div', id='js-tabData')
+        data_default = js_data.attrs['data-default']
+        iframe_link = BeautifulSoup(html.unescape(data_default), 'html.parser').find('iframe').attrs['src']
+
+        print('*** get pornhub.com iframe link ***')
+        print(movie_url)
+        print(iframe_link)
+
+        return iframe_link
+
+    elif 'redtube.com' in movie_url:
+        pass
 
 
 def get_random_int(min_sec, max_sec):
@@ -366,11 +393,15 @@ def sleeping():
 
 def main():
     # masutabe_scraiping()
-    # share_videos_scraiping()
-    kyonyudouga_stream_scraping()
+    share_videos_scraiping()
+    # kyonyudouga_stream_scraping()
 
 
 if __name__ == '__main__':
     web_driver = webdriver.PhantomJS()
-    TEST_FLAG = True
+    TEST_FLAG = False
+
     main()
+
+    web_driver.close()
+    web_driver.quit()
