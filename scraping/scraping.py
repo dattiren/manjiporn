@@ -51,6 +51,7 @@ def masutabe_scraiping():
     """
     マスタベのスクレイピングを実行して、データベースへ動画URLとタイトルを保存する
     """
+
     page_count = 1
 
     while True:
@@ -58,13 +59,12 @@ def masutabe_scraiping():
             if page_count > 1:
                 break
 
-            soup = BeautifulSoup(open('html/masutabe_all.html'), 'html.parser')
+            soup = get_soup('html/masutabe_all.html')
         else:
             if page_count > 11:
                 break
-            url = 'https://masutabe.info/all/?p=' + str(page_count)
-            html = urllib.request.urlopen(url)
-            soup = BeautifulSoup(html, 'html.parser')   # lxmlやhtml5libがインストールされている場合はそっちが優先されるので明示的に指定
+
+            soup = get_soup('https://masutabe.info/all/?p=' + str(page_count))
 
         # h2タグ内にあるaタグを抽出
         h2_tags = [h2.find('a') for h2 in soup.find_all('h2') if h2.find('a') is not None]
@@ -101,15 +101,14 @@ def masutabe_detail_scraiping(video_urls):
     :return: 動画URLとタイトルのdict配列
     :rtype:  list
     """
+
     movie_url_and_title = []
 
     for video_url in video_urls:
         if TEST_FLAG:
-            soup = BeautifulSoup(open('html/masutabe_detail.html'), 'html.parser')
+            soup = get_soup('html/masutabe_detail.html')
         else:
-            detail_url = 'https://masutabe.info' + video_url
-            html = urllib.request.urlopen(detail_url)
-            soup = BeautifulSoup(html, 'html.parser')
+            soup = get_soup('https://masutabe.info' + video_url)
 
         movie_url = soup.find('iframe').attrs['src']
         movie_tags = soup.select('ul.tag_list')[0]
@@ -140,19 +139,12 @@ def share_videos_scraiping():
             if page_count > 1:
                 break
 
-            soup = BeautifulSoup(open('html/sharevideos_all.html'), 'html.parser')
+            soup = get_soup('html/sharevideos_all.html')
         else:
             if page_count > 21:
                 break
 
-            url = 'http://share-videos.se/view/new?uid=1&page=' + str(page_count)
-            headers = {
-                "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0",
-            }
-            request = urllib.request.Request(url=url, headers=headers)
-            html = urllib.request.urlopen(request)
-
-            soup = BeautifulSoup(html, 'html.parser')
+            soup = get_soup('http://share-videos.se/view/new?uid=1&page=' + str(page_count))
 
         articles = soup.select('article.col-sm-3.video_post.postType1')
 
@@ -185,11 +177,12 @@ def share_videos_detail_scraiping(video_urls):
     :return:  動画URLとタイトルのdict配列
     :rtype:   list
     """
+
     movie_url_and_title = []
 
     for video_url in video_urls:
         if TEST_FLAG:
-            soup = BeautifulSoup(open('html/sharevideos_detail.html'), 'html.parser')
+            soup = get_soup('html/sharevideos_detail.html')
 
             video_tags = soup.select('#video_tag a')
             movie_url = soup.select('#video_tag a')[-1].attrs['href']
@@ -232,6 +225,30 @@ def share_videos_detail_scraiping(video_urls):
     return movie_url_and_title
 
 
+def get_soup(url):
+    """
+    指定されたurlのsoupオブジェクトを返す関数
+
+    :param url: 取得したいurl
+    :type  url: str
+
+    :return:    指定されたurlのsoupオブジェクト
+    :rtype:     object
+    """
+
+    if TEST_FLAG:
+        return BeautifulSoup(open(url), 'html.parser')  # lxmlやhtml5libがインストールされている場合はそっちが優先されるので明示的に指定
+    else:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0",
+        }
+
+        request = urllib.request.Request(url=url, headers=headers)
+        html = urllib.request.urlopen(request)
+
+        return BeautifulSoup(html, 'html.parser')
+
+
 def get_random_int(min_sec, max_sec):
     """
     指定したmin_secからmax_secまでの値をランダムに返す
@@ -244,6 +261,7 @@ def get_random_int(min_sec, max_sec):
     :return:        指定した範囲のランダム値
     :rtype:         int
     """
+
     return math.floor(random.random() * (max_sec - min_sec + 1)) + min_sec
 
 
@@ -251,6 +269,7 @@ def sleeping():
     """
     sleepを実行しつつメッセージも表示する
     """
+
     print('sleeping')
     sleep(get_random_int(5, 10))
     print('finish sleep')
