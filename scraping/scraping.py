@@ -7,6 +7,7 @@ import random
 import math
 import urllib.parse
 from selenium import webdriver  # pip install selenium
+import re
 
 
 def db_conect():
@@ -217,7 +218,9 @@ def share_videos_detail_scraiping(video_urls):
                 elif 'javynow.com' in movie_url:
                     pass
                 else:
+                    print('**** get_iframe_link ****')
                     movie_url = get_iframe_link(movie_url)
+                    print(movie_url)
 
                 movie_title = ' '.join(([str(video_tag.text) for i, video_tag in enumerate(video_tags) if i != len(video_tags) - 1]))
 
@@ -340,19 +343,50 @@ def get_soup(url):
         return BeautifulSoup(html_content, 'html.parser')
 
 
-# TODO xvideos.com
-# TODO redtube.com
 def get_iframe_link(movie_url):
+    """
+    動画の詳細ページのURLをiframe対応済みのURLへ変換する
+
+    :param movie_url: 動画の詳細(動画が載っている)ページのURL
+    :type  movie_url: str
+
+    :return: iframe対応済みのリンク or 空文字
+    :rtype: str
+    """
 
     parse_result = urllib.parse.urlparse(movie_url)
     query_set = urllib.parse.parse_qs(parse_result.query)
 
     if 'xvideos.com' in movie_url:
-        pass
+        return 'https://flashservice.xvideos.com/embedframe' + parse_result.path
     elif 'pornhub.com' in movie_url:
         return 'https://jp.pornhub.com/embed/' + query_set['viewkey'][0]
     elif 'redtube.com' in movie_url:
-        pass
+        return 'https://embed.redtube.com/?id=' + parse_result.path.replace('/', '')
+    elif 'thisav.com' in movie_url:
+        return 'http://www.thisav.com' + parse_result.path.replace('video/', 'video/embed/')
+    elif 'smv.to' in movie_url:
+        return 'http://smv.to/' + parse_result.path.replace('detail', 'embed')
+    elif 'gotporn.com' in movie_url:
+        m = re.search('[0-9]+$', parse_result.path)
+
+        if m:
+            return 'https://www.gotporn.com/video/' + m.group(0) + '/embedframe'
+        else:
+            return ''
+
+    elif 'jp.vjav.com' in movie_url:
+        m = re.search('[0-9]+$', parse_result.path)
+
+        if m:
+            return 'https://xhamster.com/xembed.php?video=' + m.group(0)
+        else:
+            return ''
+
+    elif 'youporn.com' in movie_url:
+        return movie_url.replace('watch', 'embed')
+    else:
+        return ''
 
 
 def get_random_int(min_sec, max_sec):
