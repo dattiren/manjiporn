@@ -296,27 +296,58 @@ def kyonyudouga_stream_detail_scraping(video_urls):
     return movie_urls
 
 
-# TODO view数が5万以上のみスクレイピング
 def pornhub_scraping():
     """
     pornhubのスクレイピングを実行して、データベースへ動画URLとタイトルを保存する
     """
 
     page_count = 1
+    base_url = 'https://jp.pornhub.com/view_video.php?viewkey='
 
     while True:
+
+        movie_title_url = []
+
         if TEST_FLAG:
             if page_count > 1:
                 break
 
             soup = get_soup('html/pornhub_all.html')
         else:
-            if page_count > 6:
+            if page_count > 21:
                 break
 
-            soup = get_soup('http://kyonyudouga.com/page/' + str(page_count))
+            soup = get_soup('https://jp.pornhub.com/video?o=mv&cc=jp&page=' + str(page_count))
+
+        video_area = soup.find('ul', class_='nf-videos videos search-video-thumbs')
+        video_li_tags = video_area.find_all('li')
+
+        # ビデオタグ内から、再生回数5万回以上かつ日本語タイトルのビデオを抽出
+        for video_li_tag in video_li_tags:
+            view_count_text = video_li_tag.find('span', class_='views').text.replace(',', '')
+            view_count_int = int(re.search('[0-9]+', view_count_text).group(0))
+
+            movie_title = video_li_tag.find('a').attrs['title']
+
+            m = re.search('[一-龥ぁ-んァ-ンぁ-んァ-ン]+', movie_title)
+
+            # 日本語が含まれており、再生数が5万以上のみ処理を実行
+            if m and view_count_int > 50000:
+                _vkey = video_li_tag.attrs['_vkey']
+                iframe_link = get_iframe_link(base_url + _vkey)
+
+                movie_title_url.append({'title': movie_title, 'url': iframe_link})
+                print(movie_title, iframe_link)
+            else:
+                pass
+
+        save_data(movie_title_url)
+
+        print('page ' + str(page_count) + ' is done.')
 
         page_count += 1
+
+        sleeping()
 
 
 def get_soup(url):
@@ -417,13 +448,14 @@ def sleeping():
 
 def main():
     # masutabe_scraiping()
-    share_videos_scraiping()
+    # share_videos_scraiping()
     # kyonyudouga_stream_scraping()
+    pornhub_scraping()
 
 
 if __name__ == '__main__':
     web_driver = webdriver.PhantomJS()
-    TEST_FLAG = False
+    TEST_FLAG = True
 
     main()
 
