@@ -5,9 +5,8 @@ import setting as Setting
 import urllib.request
 import random
 import math
-import urllib
+import urllib.parse
 from selenium import webdriver  # pip install selenium
-import html
 
 
 def db_conect():
@@ -344,23 +343,14 @@ def get_soup(url):
 # TODO xvideos.com
 # TODO redtube.com
 def get_iframe_link(movie_url):
-    sleeping()
 
-    soup = get_soup(movie_url)
+    parse_result = urllib.parse.urlparse(movie_url)
+    query_set = urllib.parse.parse_qs(parse_result.query)
 
     if 'xvideos.com' in movie_url:
         pass
     elif 'pornhub.com' in movie_url:
-        js_data = soup.find('div', id='js-tabData')
-        data_default = js_data.attrs['data-default']
-        iframe_link = BeautifulSoup(html.unescape(data_default), 'html.parser').find('iframe').attrs['src']
-
-        print('*** get pornhub.com iframe link ***')
-        print(movie_url)
-        print(iframe_link)
-
-        return iframe_link
-
+        return 'https://jp.pornhub.com/embed/' + query_set['viewkey'][0]
     elif 'redtube.com' in movie_url:
         pass
 
