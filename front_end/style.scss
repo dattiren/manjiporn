@@ -210,9 +210,11 @@ footer {
                     width: 100%;
                     @include phone($phone-size) {
                         width: 59%;
-                        height: 95%;
                         font-size: 1.3rem;
-                        float: left;
+                        position: absolute;
+                        top:50%;
+                        right:5px;
+                        transform: translateY(-50%);
                     }
                     .container-sections-one-movie-info-link {
                         display: block;
@@ -237,7 +239,7 @@ footer {
                             }
                         }
                     }
-                    .container-sections-one-movie-category {
+                    .container-sections-one-movie-info-category {
                         display: flex;
                         flex-wrap: wrap;
                         border-top: 1px solid #5b5b5b;
@@ -257,14 +259,57 @@ footer {
                             }
                         }
                     }
-                    .container-sections-one-movie-infomation {
+                    .container-sections-one-movie-info-infomation {
                         padding: 10px 0;
                         margin: 0 5px;
                         @include phone($phone-size) {
                             margin: 0;
                             padding: 5px;
-                            position: absolute;
-                            bottom: 0;
+                        }
+                    }
+                }
+            } //playback再生ページのcss
+            .container-sections-one-playback {
+                position: relative;
+                width: 100%;
+                padding-bottom: 56.25%;
+                iframe {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .container-sections-one-playback-info {
+                width: 100%;
+                h2 {
+                    width: 100%;
+                    font-size: 1.8rem;
+                    padding: 10px;
+                    margin: 0;
+                }
+                .container-sections-one-playback-infomation {
+                    padding: 0 10px 10px 10px;
+                    font-size: 1.8rem;
+                }
+                .container-sections-one-playback-category {
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    border-top: 1px solid #5b5b5b;
+                    border-bottom: 1px solid #5b5b5b;
+                    font-size: 1.5rem;
+                    padding: 10px;
+                    a {
+                        margin: 5px;
+                        padding: 5px;
+                        background: #303030;
+                        color: #afafaf;
+                        border-radius: 20px;
+                        @include phone($phone-size) {
+                            background-color: $title_gray;
+                            margin: 1px 3px;
                         }
                     }
                 }
@@ -342,14 +387,14 @@ footer {
             }
         }
     } //利用規約のcss
-    .container-scrolltitle {
+    .container-singletitle {
         margin: 0 auto 20px auto;
         font-size: 3.0rem;
         width: 100%;
         padding: 10px;
         background-color: $title_gray;
     }
-    .container-scrollbox {
+    .container-singlebox {
         width: 90%;
         margin: 0 auto 0 auto;
         height: 500px;
@@ -357,6 +402,35 @@ footer {
         background-color: $title_gray;
         p {
             font-size: 1.5rem;
+        }
+    } //contact formページ
+    .container-contact {
+        width: 90%;
+        margin: 0 auto 0 auto;
+        form {
+            font-size: 1.8rem;
+            label {
+                display: block;
+            }
+            input[type=text],
+            textarea {
+                display: block;
+                width: 80%;
+                font-size: 1.5rem;
+                margin: 0 auto 15px auto;
+            }
+            input[type=text]{
+                height:30px;
+            }
+            button[type=submit]{
+                height:50px;
+                width:100px;
+                text-align: center;
+                font-size: 2.0rem;
+                background-color: #1270d5;
+                border:none;
+                color:$font_color;
+            }
         }
     }
 }
