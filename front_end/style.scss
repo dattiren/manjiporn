@@ -67,9 +67,11 @@ header {
         }
         .header-container-searchform {
             width: 380px;
-            margin-top: 10px;
+            height:100%;
             margin-left: 20px;
             position: relative;
+            display: flex;
+            align-items: center;
             @include phone($phone-size) {
                 width: 50%;
             }
@@ -85,11 +87,13 @@ header {
                     width: 100%;
                     font-size: 1.4rem;
                 }
+                @include phone($phone-size) {
+                    height:30px;
+                }
             }
             button[type="submit"] {
                 height: 30px;
                 width: 30px;
-                margin-top: 10px;
                 right: 10px;
                 position: absolute;
                 background-image: url("searchbtn.svg");
@@ -98,6 +102,10 @@ header {
                 background-size: cover;
                 @include tablet($tablet-size) {
                     font-size: 1.4rem;
+                }
+                @include phone($phone-size) {
+                    height:20px;
+                    width:20px;
                 }
             }
         }
@@ -137,7 +145,7 @@ footer {
 }
 
 .container {
-    width: 75%;
+    width: 80%;
     margin: 30px auto 0 auto;
     overflow: auto;
     @include tablet($tablet-size) {
@@ -158,18 +166,18 @@ footer {
         .container-sections-one {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
+            justify-content: space-between;
             @include phone($phone-size) {
                 margin-top: 10px;
                 justify-content: flex-start;
             }
             h1 {
                 font-size: 3.0rem;
-                height: 50px;
-                line-height: 50px;
+                height: 40px;
+                line-height: 40px;
                 width: 100%;
                 margin: 0;
-                text-align: center;
+                padding-left:20px;
                 background-color: $title_gray;
                 @include phone($phone-size) {
                     background-color: $title_gray_phone;
@@ -182,7 +190,7 @@ footer {
                 }
             }
             .container-sections-one-movie {
-                width: 200px;
+                width: 32%;
                 height: auto;
                 margin: 10px 0 10px 0;
                 position: relative;
@@ -198,7 +206,7 @@ footer {
                     margin: 0 0 10px 0;
                 }
                 img {
-                    height: 150px;
+                    width:100%;
                     @include phone($phone-size) {
                         height: auto;
                         width: 40%;
@@ -220,22 +228,18 @@ footer {
                         display: block;
                         h2 {
                             width: 100%;
-                            padding: 5px 0;
-                            margin: 5px 0;
+                            margin: 5px 0 ;
                             font-size: 1.5rem;
-                            white-space: nowrap;
                             overflow: hidden;
-                            text-overflow: ellipsis;
-                            -o-text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+                            white-space: normal;
                             @include phone($phone-size) {
                                 margin: 0;
                                 padding-left: 5px;
                                 font-size: 1.3rem;
                                 height: 33px;
-                                display: -webkit-box;
-                                -webkit-box-orient: vertical;
-                                -webkit-line-clamp: 2;
-                                white-space: normal;
                             }
                         }
                     }
@@ -243,13 +247,12 @@ footer {
                         display: flex;
                         flex-wrap: wrap;
                         border-top: 1px solid #5b5b5b;
-                        border-bottom: 1px solid #5b5b5b;
                         @include phone($phone-size) {
                             display: none;
                         }
                         a {
-                            margin: 5px;
-                            padding: 5px;
+                            margin: 5px 3px 1px 3px;
+                            padding: 1px 5px;
                             background: #303030;
                             color: #afafaf;
                             border-radius: 20px;
@@ -260,11 +263,13 @@ footer {
                         }
                     }
                     .container-sections-one-movie-info-infomation {
-                        padding: 10px 0;
-                        margin: 0 5px;
+                        margin: 0 5px 5px 0;
                         @include phone($phone-size) {
                             margin: 0;
                             padding: 5px;
+                        }
+                        i{
+                            margin-right:2px;
                         }
                     }
                 }
@@ -329,8 +334,9 @@ footer {
         .contaier-side-category {
             width: 100%;
             &>h1 {
-                font-size: 2.5rem;
+                font-size: 2.0rem;
                 margin: 0;
+                height: 30px;
                 padding: 5px;
                 background-color: $title_gray;
                 @include tablet($tablet-size) {
@@ -338,6 +344,9 @@ footer {
                 }
                 @include phone($phone-size) {
                     display: none;
+                }
+                i{
+                    margin-right:2px;
                 }
             }
             ul {
@@ -405,7 +414,7 @@ footer {
         }
     } //contact formページ
     .container-contact {
-        width: 90%;
+        width: 80%;
         margin: 0 auto 0 auto;
         form {
             font-size: 1.8rem;
@@ -415,9 +424,9 @@ footer {
             input[type=text],
             textarea {
                 display: block;
-                width: 80%;
+                width: 100%;
                 font-size: 1.5rem;
-                margin: 0 auto 15px auto;
+                margin: 5px 0 20px 0;
                 border-radius: 5px;
             }
             input[type=text]{
@@ -430,6 +439,7 @@ footer {
                 font-size: 2.0rem;
                 background-color: #1270d5;
                 border:none;
+                border-radius: 5px;
                 color:$font_color;
             }
         }

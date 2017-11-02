@@ -13,7 +13,7 @@
 <body>
     <header>
         <div class="header-container">
-            <a class="header-container-logo" href="index.html">
+            <a class="header-container-logo" href="index.php">
                 <img src="logo.png" alt="">
             </a>
             <form class="header-container-searchform" name="searchform" method="get" action="#">
