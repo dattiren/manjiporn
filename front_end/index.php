@@ -81,8 +81,7 @@
 		</div>
 		<div class="container-side">
 			<nav class="contaier-side-category">
-				<h1>
-					<i class="fa fa-bed" aria-hidden="true"></i>CATEGORY</h1>
+				<h1><i class="fa fa-bed" aria-hidden="true"></i>CATEGORY</h1>
 				<ul class="contaier-side-category-list">
 					<li>
 						<i class="fa fa-square-o" aria-hidden="true"></i>
@@ -90,7 +89,7 @@
 					</li>
 					<li>
 						<i class="fa fa-check-square-o" aria-hidden="true"></i>
-						<a href="">bbbbb</a>
+						<a href="#" id="selected">bbbbb</a>
 					</li>
 					<li>
 						<i class="fa fa-square-o" aria-hidden="true"></i>

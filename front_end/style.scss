@@ -264,6 +264,7 @@ footer {
                     }
                     .container-sections-one-movie-info-infomation {
                         margin: 0 5px 5px 0;
+                        font-size: 1.5rem;
                         @include phone($phone-size) {
                             margin: 0;
                             padding: 5px;
@@ -349,7 +350,7 @@ footer {
                     margin-right:2px;
                 }
             }
-            ul {
+            .contaier-side-category-list {
                 width: 100%;
                 list-style: none;
                 padding: 0;
@@ -383,6 +384,9 @@ footer {
                             display: none;
                         }
                     }
+                }
+                #selected{
+                    color: #CD3939;
                 }
             }
         }
