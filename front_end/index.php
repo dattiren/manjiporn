@@ -11,23 +11,7 @@
 </head>
 
 <body>
-	<header>
-		<div class="header-container">
-			<a class="header-container-logo" href="index.php">
-				<img src="logo.png" alt="">
-			</a>
-			<form class="header-container-searchform" name="searchform" method="get" action="#">
-				<input name="keywords" value="" type="text" />
-				<button type="submit" alt="検索" name="searchBtn4"></button>
-			</form>
-			<a href="#" class="header-container-create">
-				CREATE ACCOUNT
-			</a>
-			<a href="#" class="header-container-login">
-				LOGIN
-			</a>
-		</div>
-	</header>
+<?php include('header.php'); ?>
 	<div class="container">
 		<div class="container-senctions">
 			<section class="container-sections-one">
@@ -79,36 +63,9 @@
 				</article>
 			</section>
 		</div>
-		<div class="container-side">
-			<nav class="contaier-side-category">
-				<h1><i class="fa fa-bed" aria-hidden="true"></i>CATEGORY</h1>
-				<ul class="contaier-side-category-list">
-					<li>
-						<i class="fa fa-square-o" aria-hidden="true"></i>
-						<a href="">aaaaaa</a>
-					</li>
-					<li>
-						<i class="fa fa-check-square-o" aria-hidden="true"></i>
-						<a href="#" id="selected">bbbbb</a>
-					</li>
-					<li>
-						<i class="fa fa-square-o" aria-hidden="true"></i>
-						<a href="">vcvcv</a>
-					</li>
-					<li>
-						<i class="fa fa-square-o" aria-hidden="true"></i>
-						<a href="">popopop</a>
-					</li>
-				</ul>
-			</nav>
-			<div class="contaier-side-adsence">ad</div>
-			<div class="contaier-side-adsence">ad</div>
-		</div>
+		<?php include('side_nav.php'); ?>
 	</div>
 	<div class="adsence"></div>
-	<footer>footer
-		<a href="use_info.php">利用規約</a>
-		<a href="contact.php">お問い合わせ</a>
-	</footer>
+	<?php include('footer.php'); ?>
 </body>
 </html>

@@ -11,23 +11,7 @@
 </head>
 
 <body>
-    <header>
-        <div class="header-container">
-            <a class="header-container-logo" href="index.php">
-                <img src="logo.png" alt="">
-            </a>
-            <form class="header-container-searchform" name="searchform" method="get" action="#">
-                <input name="keywords" value="" type="text" />
-                <button type="submit" alt="検索" name="searchBtn4"></button>
-            </form>
-            <a href="#" class="header-container-create">
-                CREATE ACCOUNT
-            </a>
-            <a href="#" class="header-container-login">
-                LOGIN
-            </a>
-        </div>
-    </header>
+<?php include('header.php'); ?>
 
     <div class="container">
         <h1 class="container-singletitle">Contact form</h1>
@@ -50,10 +34,7 @@
 
 
     <div class="adsence"></div>
-    <footer>footer
-		<a href="use_info.html">利用規約</a>
-		<a href="contact.html">お問い合わせ</a>
-	</footer>
+    <?php include('footer.php'); ?>
 </body>
 
 </html>
