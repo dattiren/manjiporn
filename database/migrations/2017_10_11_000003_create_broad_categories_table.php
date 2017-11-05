@@ -4,14 +4,15 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration
+class CreateBroadCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
+     *
      * Table:
-     *      categories
+     *      broad_categories
      * Columns:
-     *      id          - unsigned int
+     *      id          - unsigned medium int, auto_increment
      *      name        - varchar(255)
      *      created_at  - timestamp
      *      updated_at  - timestamp
@@ -19,7 +20,7 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('broad_categories', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('name', 255);
             $table->timestamps();
@@ -33,6 +34,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('broad_categories');
     }
 }
