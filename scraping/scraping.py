@@ -155,7 +155,7 @@ def share_videos_scraiping():
 
         video_urls = [a.find('a').attrs['href'] for a in articles]
 
-        # sleeping()
+        sleeping()
 
         movie_url_and_title = share_videos_detail_scraiping(video_urls)
 
@@ -222,9 +222,11 @@ def share_videos_detail_scraiping(video_urls):
                 movie_url = get_iframe_link(movie_url)
                 print(movie_url)
 
+            if movie_url == '':
+                continue
+
             movie_title = ' '.join(([str(video_tag.text) for i, video_tag in enumerate(video_tags) if i != len(video_tags) - 1]))
 
-        # TODO 本番でも同様に動作するか検証
         movie_url_and_title.append({
             'title': movie_title,
             'url': movie_url,
