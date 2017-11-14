@@ -224,7 +224,11 @@ def share_videos_detail_scraiping(video_urls):
 
             movie_title = ' '.join(([str(video_tag.text) for i, video_tag in enumerate(video_tags) if i != len(video_tags) - 1]))
 
-        movie_url_and_title.append({'title': movie_title, 'url': movie_url})
+        movie_url_and_title.append({
+            'title': movie_title,
+            'url': movie_url,
+            'tags': movie_title.split(' ')
+        })
 
         sleeping()
 
