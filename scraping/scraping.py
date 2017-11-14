@@ -258,10 +258,11 @@ def kyonyudouga_stream_scraping():
 
         sleeping()
 
-        movie_origin_urls = kyonyudouga_stream_detail_scraping(movie_urls)
-        movie_url_and_title = [{'title': movie_title, 'url': movie_url} for movie_title, movie_url in zip(movie_titles, movie_origin_urls)]
+        movie_iframe_urls, tags = kyonyudouga_stream_detail_scraping(movie_urls)
 
-        save_data(movie_url_and_title)
+        movie_obj_list = [{'tags': tag_list, 'title': movie_title, 'url': movie_url} for movie_title, movie_url, tag_list in zip(movie_titles, movie_iframe_urls, tags)]
+
+        save_data(movie_obj_list)
 
         sleeping()
 
@@ -277,11 +278,12 @@ def kyonyudouga_stream_detail_scraping(video_urls):
    :param    video_urls: 動画詳細のURL(share videos内)
    :type     video_urls: list
 
-   :return:  動画URLの配列
+   :returns: url, タグ
    :rtype:   list
    """
 
     movie_urls = []
+    tags = []
 
     for video_url in video_urls:
         if TEST_FLAG:
@@ -289,11 +291,16 @@ def kyonyudouga_stream_detail_scraping(video_urls):
         else:
             soup = get_soup(video_url)
 
+        # iframe用のリンクを取得
         movie_urls.append(soup.find('iframe').attrs['src'])
+
+        # TODO 本番でも同様にタグを取得することができるか検証
+        # タグを取得
+        tags.append([a_tag.text for a_tag in soup.find('li', id='the_tags').find_all('a')])
 
         sleeping()
 
-    return movie_urls
+    return movie_urls, tags
 
 
 def pornhub_scraping():
@@ -486,8 +493,8 @@ def sleeping():
 def main():
     # masutabe_scraiping()
     # share_videos_scraiping()
-    # kyonyudouga_stream_scraping()
-    pornhub_scraping()
+    kyonyudouga_stream_scraping()
+    # pornhub_scraping()
 
 
 if __name__ == '__main__':
