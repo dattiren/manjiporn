@@ -299,7 +299,6 @@ def kyonyudouga_stream_detail_scraping(video_urls):
         # iframe用のリンクを取得
         movie_urls.append(soup.find('iframe').attrs['src'])
 
-        # TODO 本番でも同様にタグを取得することができるか検証
         # タグを取得
         tags.append([a_tag.text for a_tag in soup.find('li', id='the_tags').find_all('a')])
 
@@ -314,8 +313,7 @@ def pornhub_scraping():
     """
 
     page_count = 1
-    # TODO 英語版に切り替える
-    base_url = 'https://jp.pornhub.com/view_video.php?viewkey='
+    base_url = 'https://www.pornhub.com/view_video.php?viewkey='
 
     while True:
 
@@ -346,9 +344,7 @@ def pornhub_scraping():
 
             # 日本語が含まれており、再生数が5万以上のみ処理を実行
             if m and view_count_int > 50000:
-                # TODO 英語版にアクセスしていけるか検証
                 movie_urls.append(base_url + video_li_tag.attrs['_vkey'])
-
 
         movie_obj = pornhub_detail_scraping(movie_urls)
 
@@ -362,6 +358,15 @@ def pornhub_scraping():
 
 
 def pornhub_detail_scraping(movie_urls):
+    """
+    受け取ったpornhub内の動画URLから、タイトル、iframe対応url、tagを取得
+
+    :param      movie_urls:  pornhub内の動画url
+    :type       movie_urls:  list
+
+    :return:    タイトル、iframe対応リンク、tagをまとめたオブジェクト
+    :rtype:     list
+    """
 
     movie_obj_list = []
 
@@ -377,12 +382,9 @@ def pornhub_detail_scraping(movie_urls):
             soup = get_soup(url)
 
         #  カテゴリーの抽出
-        # TODO 本番でも同様に抽出できるか検証
         for category in soup.select('.categoriesWrapper a'):
             if 'onclick' in category.attrs:
                 category_list.append(category.text)
-
-        # print(category_list)
 
         # タイトルの抽出
         title = ''
@@ -396,6 +398,7 @@ def pornhub_detail_scraping(movie_urls):
              'url': get_iframe_link(url),
              'tags': category_list
         })
+        print(movie_obj_list)
 
     return movie_obj_list
 
