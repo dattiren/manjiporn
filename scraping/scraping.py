@@ -372,6 +372,7 @@ def pornhub_detail_scraping(movie_urls):
             soup = get_soup(url)
 
         #  カテゴリーの抽出
+        # TODO 本番でも同様に抽出できるか検証
         for category in soup.select('.categoriesWrapper a'):
             if 'onclick' in category.attrs:
                 category_list.append(category.text)
@@ -492,8 +493,8 @@ def sleeping():
 
 def main():
     # masutabe_scraiping()
-    # share_videos_scraiping()
-    kyonyudouga_stream_scraping()
+    share_videos_scraiping()
+    # kyonyudouga_stream_scraping()
     # pornhub_scraping()
 
 
