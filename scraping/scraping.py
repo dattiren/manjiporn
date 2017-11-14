@@ -302,6 +302,7 @@ def pornhub_scraping():
     """
 
     page_count = 1
+    # TODO 英語版に切り替える
     base_url = 'https://jp.pornhub.com/view_video.php?viewkey='
 
     while True:
@@ -333,6 +334,7 @@ def pornhub_scraping():
 
             # 日本語が含まれており、再生数が5万以上のみ処理を実行
             if m and view_count_int > 50000:
+                # TODO 英語版にアクセスしていけるか検証
                 movie_urls.append(base_url + video_li_tag.attrs['_vkey'])
 
 
