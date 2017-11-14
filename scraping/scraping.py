@@ -155,7 +155,7 @@ def share_videos_scraiping():
 
         video_urls = [a.find('a').attrs['href'] for a in articles]
 
-        sleeping()
+        # sleeping()
 
         movie_url_and_title = share_videos_detail_scraiping(video_urls)
 
@@ -208,21 +208,21 @@ def share_videos_detail_scraiping(video_urls):
             if len(video_tags) == 0:
                 print('video_tags is 0 skip')
                 continue
+
+            movie_url = video_tags[-1].attrs['href']
+
+            # リンク先がyoutubeもしくはfc2なら処理をスキップ、javynowはそのまま、それ以外は個別に取得処理を実施
+            if 'youtube.com' in movie_url or 'fc2.com' in movie_url:
+                print('youtube.com or fc2.com skip')
+                continue
+            elif 'javynow.com' in movie_url:
+                pass
             else:
-                movie_url = video_tags[-1].attrs['href']
+                print('**** get_iframe_link ****')
+                movie_url = get_iframe_link(movie_url)
+                print(movie_url)
 
-                # リンク先がyoutubeもしくはfc2なら処理をスキップ、javynowはそのまま、それ以外は個別に取得処理を実施
-                if 'youtube.com' in movie_url or 'fc2.com' in movie_url:
-                    print('youtube.com or fc2.com skip')
-                    continue
-                elif 'javynow.com' in movie_url:
-                    pass
-                else:
-                    print('**** get_iframe_link ****')
-                    movie_url = get_iframe_link(movie_url)
-                    print(movie_url)
-
-                movie_title = ' '.join(([str(video_tag.text) for i, video_tag in enumerate(video_tags) if i != len(video_tags) - 1]))
+            movie_title = ' '.join(([str(video_tag.text) for i, video_tag in enumerate(video_tags) if i != len(video_tags) - 1]))
 
         movie_url_and_title.append({'title': movie_title, 'url': movie_url})
 
