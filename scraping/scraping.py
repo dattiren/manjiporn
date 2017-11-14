@@ -395,8 +395,8 @@ def pornhub_detail_scraping(movie_urls):
 
         movie_obj_list.append({
             'title': title,
-             'url': get_iframe_link(url),
-             'tags': category_list
+            'url': get_iframe_link(url),
+            'tags': category_list
         })
         print(movie_obj_list)
 
