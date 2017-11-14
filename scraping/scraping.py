@@ -306,7 +306,7 @@ def pornhub_scraping():
 
     while True:
 
-        movie_title_url = []
+        movie_urls = []
 
         if TEST_FLAG:
             if page_count > 1:
@@ -333,21 +333,56 @@ def pornhub_scraping():
 
             # 日本語が含まれており、再生数が5万以上のみ処理を実行
             if m and view_count_int > 50000:
-                _vkey = video_li_tag.attrs['_vkey']
-                iframe_link = get_iframe_link(base_url + _vkey)
+                movie_urls.append(base_url + video_li_tag.attrs['_vkey'])
 
-                movie_title_url.append({'title': movie_title, 'url': iframe_link})
-                print(movie_title, iframe_link)
-            else:
-                pass
 
-        save_data(movie_title_url)
+        movie_obj = pornhub_detail_scraping(movie_urls)
+
+        save_data(movie_obj)
 
         print('page ' + str(page_count) + ' is done.')
 
         page_count += 1
 
         sleeping()
+
+
+def pornhub_detail_scraping(movie_urls):
+
+    movie_obj_list = []
+
+    for url in movie_urls:
+
+        sleeping()
+
+        category_list = []
+
+        if TEST_FLAG:
+            soup = get_soup('html/pornhub_detail.html')
+        else:
+            soup = get_soup(url)
+
+        #  カテゴリーの抽出
+        for category in soup.select('.categoriesWrapper a'):
+            if 'onclick' in category.attrs:
+                category_list.append(category.text)
+
+        # print(category_list)
+
+        # タイトルの抽出
+        title = ''
+        for meta in soup.find_all('meta'):
+            if 'name' in meta.attrs and meta.attrs['name'] == 'twitter:title':
+                title = meta.attrs['content']
+                break
+
+        movie_obj_list.append({
+            'title': title,
+             'url': get_iframe_link(url),
+             'tags': category_list
+        })
+
+    return movie_obj_list
 
 
 def get_soup(url):
