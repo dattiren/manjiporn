@@ -167,6 +167,7 @@ footer {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            margin-bottom: 10px;
             @include phone($phone-size) {
                 margin-top: 10px;
                 justify-content: flex-start;
