@@ -37,6 +37,10 @@
 						<a>tintintintin</a>
 						<a>ponponpnop</a>
 					</div>
+					<div class="container-sections-one-playback-report">
+					<a href="#">Add to Mylist</a>
+					<a href="#">Can't watch</a>
+					</div>
 				</div>
 			</section>
 			<section class="container-sections-one">

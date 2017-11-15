@@ -7,8 +7,8 @@
 						<a href="">aaaaaa</a>
 					</li>
 					<li>
-						<i class="fa fa-check-square-o" aria-hidden="true"></i>
-						<a href="#" id="selected">bbbbb</a>
+						<i class="fa fa-check-square-o" id="selected_mark" aria-hidden="true"></i>
+						<a href="#" id="selected_char">bbbbb</a>
 					</li>
 					<li>
 						<i class="fa fa-square-o" aria-hidden="true"></i>
