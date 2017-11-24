@@ -5,6 +5,7 @@ sans-serif;
 $background_color:black;
 $contents_gray:#101010;
 $title_gray_phone:#2b2b2b;
+$cat_back:#303030;
 $tablet-size:1024px;
 $phone-size:767px;
 @mixin tablet($tablet-size) {
@@ -252,7 +253,7 @@ footer {
                         a {
                             margin: 5px 3px 1px 3px;
                             padding: 1px 5px;
-                            background: #303030;
+                            background: $cat_back;
                             color: #afafaf;
                             border-radius: 20px;
                             @include phone($phone-size) {
@@ -264,6 +265,28 @@ footer {
                     .container-sections-one-movie-info-infomation {
                         margin: 0 5px 5px 0;
                         font-size: 1.5rem;
+                        .container-sections-one-movie-info-infomation-play{
+                            
+                            /*本当はこの形でアイコンを使いたいのだが、高さをそろえるのに時間がかかりそう
+                            &::before{
+                                content:'';
+                                display: inline-block;
+                                background-image: url(play.png);
+                                background-repeat: no-repeat;
+                                height:15px;
+                                width:15px;
+                                background-size:contain;
+                            }
+                            */
+                            i{
+                                color:#707070;
+                            }
+                        }
+                        .container-sections-one-movie-info-infomation-folder{
+                            i{
+                                color: #707070;
+                            }
+                        }
                         @include phone($phone-size) {
                             margin: 0;
                             padding: 5px;
@@ -312,7 +335,7 @@ footer {
                     a {
                         margin: 5px;
                         padding: 5px;
-                        background: #303030;
+                        background: $cat_back;
                         color: #afafaf;
                         border-radius: 20px;
                         @include phone($phone-size) {
@@ -330,7 +353,7 @@ footer {
                     a{
                         width:40%;
                         padding: 5px 10px;
-                        background: #303030;
+                        background: $cat_back;
                         color: #afafaf;
                         border-radius: 10px;
                         font-size:2.0rem;

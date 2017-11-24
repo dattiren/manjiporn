@@ -6,10 +6,12 @@
 						<h2>Big tits sample big tits sampleadf aef;w eihfd'q oefhia eorif hq[oriag hfae[ori big tits sample big tits sampleadfaef;weihf　d'qoefhiaeo　rifhq[oria　ghfae[or　っっっっ　ｄi</h2>
 					</a>
 					<div class="container-sections-one-movie-info-infomation">
-						<span>
-							<i class="fa fa-play-circle" aria-hidden="true"></i>44444</span>
-						<span>
-							<i class="fa fa-folder" aria-hidden="true"></i>ddddd</span>
+						<span class="container-sections-one-movie-info-infomation-play">
+							<i class="fa fa-play-circle" aria-hidden="true"></i>44444
+						</span>
+						<span class="container-sections-one-movie-info-infomation-folder">
+							<i class="fa fa-folder" aria-hidden="true"></i>ddddd
+						</span>
 					</div>
 					<div class="container-sections-one-movie-info-category">
 						<a>wawawa</a>
