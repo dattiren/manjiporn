@@ -5,6 +5,7 @@
                 <a href="use_info.php">About us</a>
                 <a href="contact.php">Contact us</a>
                 <a href="use_info.php">privacy policy</a>
+                <a href="register.php">Register</a>
                 <a href="contact.php">DMCA</a>
             </div>
             <div class="footcontainer-one">
