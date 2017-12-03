@@ -10,7 +10,7 @@
 	<a href="#" class="header-container-create">
 		CREATE ACCOUNT
 	</a>
-	<a href="#" class="header-container-login">
+	<a href="login.php" class="header-container-login">
 		LOGIN
 	</a>
 </div>
