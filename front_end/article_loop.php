@@ -21,7 +21,7 @@ for($i=0;$i<12;$i++){
 				<a href="<?php echo $data['movie_link']; ?>"><img src="<?php echo $data['img_link']; ?>" alt=""></a>
 				<div class="container-sections-one-movie-info">
 					<a class="container-sections-one-movie-info-link" href="<?php echo $data['movie_link']; ?>">
-						<h2><?php echo $data['title']; ?></h2>
+						<h2><?php echo substr($data['title'], 0, 60).'...'; ?></h2>
 					</a>
 					<div class="container-sections-one-movie-info-infomation">
 						<span class="container-sections-one-movie-info-infomation-play">
