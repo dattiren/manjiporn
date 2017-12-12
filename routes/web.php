@@ -12,5 +12,29 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+Route::get('/contactus', function () {
+    return view('contact');
+});
+
+Route::get('/info', function () {
+    return view('use_info');
+});
+
+Route::get('/movie/{id}', function ($id) {
+    return view('playback');
+});
+
+Route::get('/signin', function () {
+    return view('login');
+});
+
+Route::get('/signup', function () {
+    return view('register');
+});
+
+Route::get('/admin/movie/{id}', function () {
+    return view('edit_movie');
 });
