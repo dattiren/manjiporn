@@ -1,6 +1,6 @@
 <?php
-    $admin_flag = False;
-    $title = 'movie play';
+		$admin_flag = False;
+		$title = $movie_data->title;
 ?>
 
 <!DOCTYPE html>
@@ -14,29 +14,26 @@
 		<div class="container-senctions">
 			<section class="container-sections-one">
 				<div class="container-sections-one-playback">
-					<iframe src="https://www.youtube.com/embed/32e6fwZtVkk" frameborder="0" allowfullscreen>
+					<iframe src="<?php echo $movie_data->url; ?>" frameborder="0" allowfullscreen>
 					</iframe>
 				</div>
 				<div class="container-sections-one-playback-info">
-					<h2>BIGdf Big tits sample big tits sampleadfaef;weihfd'qoefh iaeor ifhq[oria ghfae[ori big </h2>
+					<h2><?php echo $movie_data->title?></h2>
 					<div class="container-sections-one-playback-infomation">
 						<span>
-							<i class="fa fa-play-circle" aria-hidden="true"></i>44444</span>
-						<span>
-							<i class="fa fa-folder" aria-hidden="true"></i>ddddd</span>
+							<i class="fa fa-play-circle" aria-hidden="true"></i><?php echo $movie_data->played_count; ?>
+						</span>
+						<!--<span>
+							<i class="fa fa-folder" aria-hidden="true"></i>ddddd
+						</span>-->
 					</div>
 					<div class="container-sections-one-playback-category">
-						<a>wawawa</a>
-						<a>fefefefefe</a>
-						<a>tintintintin</a>
-						<a>ponponpnop</a>
-						<a>wawawa</a>
-						<a>fefefefefe</a>
-						<a>tintintintin</a>
-						<a>ponponpnop</a>
+					<?php foreach($categories as $category): ?>
+						<a><?php echo $category; ?></a>
+					<?php endforeach; ?>
 					</div>
 					<div class="container-sections-one-playback-report">
-					<a href="#">Add to Mylist</a>
+					<!-- <a href="#">Add to Mylist</a> -->
 					<a href="#">Can't watch</a>
 					</div>
 				</div>

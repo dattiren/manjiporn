@@ -2,7 +2,7 @@
 //データの持ち方は以下の通り
 $a_movie_data = array(
 	'title'       => 'Big tits sample big tits sampleadf aef;w eihfdq oefhia eorif hq[oriag hfae[ori big tits sample big tits sampleadfaef;weihf　dqoefhiaeo　rifhq[oria　ghfae[or　っっっっ　ｄi',
-	'movie_link'  => 'playback.php',
+	'movie_link'  => '/movie?movie_id=1',
 	'img_link'    => 'rocket.jpg',
 	'categories'    => array(
 			'wawawa', 'fefefe', 'titititi', 'popopo'
