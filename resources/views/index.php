@@ -1,6 +1,6 @@
 <?php
     $admin_flag = False;
-    $title = 'MANJI_pc_top';
+		$title = 'MANJI_pc_top';
 ?>
 <!DOCTYPE html>
 <html lang="ja">

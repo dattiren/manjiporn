@@ -3,16 +3,34 @@
 ## Version
 Laravel v5.5.14 (stable at 2017/10/09)
 
-## 2017/10/12
-データベース設定
+## 2017/10/22
+
+## Usage
+1. mysqlへログイン  
+`mysql -u root -psecret`
+
+2. データベースの作成  
+`create database manjiporn;`
+
+3. .env.exampleから.envを作成  
+`cp .env.example .env`
+
+4. .envを自分のDB用に変更(DBコネクション設定を参考に)
+
+4. autoload.phpの作成  
+`composer install`
+
+5. App_keyの生成  
+`php artisan key:generate`
+
+6. マイグレーション  
+`php artisan migrate`
+
+7. 起動  
+`php artisan serve`
+
 
 ### DBコネクション設定
-.env.exampleを.envにコピー
-
-```
-cp .env.example .env
-```
-
 .envの下記部分を自分のDB用に変更
 
 ```
@@ -24,11 +42,5 @@ DB_USERNAME=root
 #DB_PASSWORD=secret
 ```
 
-### マイグレーション
-マイグレーション前にデータベースを先に作成しておく！  
-manjiporn直下で下記コマンドを実行しテーブルを作成  
-php artisanコマンドはmanjiporn直下じゃなきゃ動かないよ
-
-```
-php artisan migrate
-```
+### 注意事項
+php artisanコマンドは**manjiporn直下**じゃなきゃ動かないよ

@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'HomeController@index');
 
 Route::get('/contactus', function () {
     return view('contact');
@@ -23,10 +21,10 @@ Route::get('/info', function () {
     return view('use_info');
 });
 
-Route::get('/movie/{id}', function ($id) {
+/*Route::get('/movie/{id}', function ($id) {
     return view('playback');
 });
-
+*/
 Route::get('/movie', 'PlaybackController@index');
 
 Route::get('/signin', function () {
