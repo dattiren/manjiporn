@@ -1,9 +1,9 @@
 <?php
-		$admin_flag = False;
 		$title = $movie_data->title;
-
+		$CAT = false;
+		$admin_flag = false;
 		$Myclass = new App\MyLibs\MyClass;
-		$categories =  $Myclass->getCategories($movie_data->id);
+		$categories =  $Myclass->getCategoriesByMovieId($movie_data->id);
 ?>
 
 <!DOCTYPE html>
@@ -41,10 +41,10 @@
 					</div>
 				</div>
 			</section>
-			<!--<section class="container-sections-one">
+			<section class="container-sections-one">
 			<h1>Others Recommended</h1>
-			<?php //include('article_loop.php'); ?>
-		</section>-->
+			<?php include('article_loop.php'); ?>
+		</section>
 		</div>
 		<?php include('side_nav.php'); ?>
 	</div>

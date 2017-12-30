@@ -11,9 +11,9 @@ class PlaybackController extends Controller
 {
     public function index(Request $request)
     {
+      $CAT = false;   
       $movie_data = DB::table('movies')->select('id','title', 'url', 'played_count')->where('id', $request->input('movie_id') )->get();
-      $movies = DB::table('movies')->limit(12)->get();
-      $categories = DB::table('movies_categories')->leftJoin('categories', 'movies_categories.category_id', '=', 'categories.id')->where('movies_categories.movie_id', $request->input('movie_id') )->pluck('categories.name');
-      return view('playback',['movie_data' => $movie_data[0], 'categories' =>$categories , 'movies' => $movies ]);
+      
+      return view('playback',['movie_data' => $movie_data[0],'CAT' => $CAT]);
     }
 }

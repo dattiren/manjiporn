@@ -21,11 +21,10 @@ Route::get('/info', function () {
     return view('use_info');
 });
 
-/*Route::get('/movie/{id}', function ($id) {
-    return view('playback');
-});
-*/
 Route::get('/movie', 'PlaybackController@index');
+
+Route::get('/category', 'HomeController@category');
+
 
 Route::get('/signin', function () {
     return view('login');

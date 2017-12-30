@@ -1,5 +1,10 @@
 <?php
 $Myclass = new App\MyLibs\MyClass;
+if($CAT){
+	$movies = $Myclass->getMoviesByCat($category_id);
+}else{
+	$movies = $Myclass->getNewMovies();
+}
 ?>
 <?php foreach($movies as $movie): ?>
 			<article class="container-sections-one-movie">
@@ -17,7 +22,7 @@ $Myclass = new App\MyLibs\MyClass;
 						</span>
 					</div>
 					<div class="container-sections-one-movie-info-category">
-					<?php $categories =  $Myclass->getCategories($movie->id);?>
+					<?php $categories =  $Myclass->getCategoriesByMovieId($movie->id);?>
 						<?php foreach($categories as $category):?>
 							<a href="#"><?php echo $category; ?></a>
 						<?php endforeach;?>

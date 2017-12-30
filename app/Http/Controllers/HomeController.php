@@ -11,9 +11,14 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-      $movies = DB::table('movies')->limit(12)->get();
-
-      //$categories = DB::table('movies_categories')->leftJoin('categories', 'movies_categories.category_id', '=', 'categories.id')->where('movies_categories.movie_id', $request->input('movie_id') )->pluck('categories.name');
-      return view('index',[ 'movies' =>$movies ]);
+      $CAT = false;   
+      return view('index',['CAT'=>$CAT]);
     }
+
+    public function category(Request $request)
+    {
+      $CAT = true;
+      return view('index',['CAT'=>$CAT,'category_id'=>$request->input('category_id')]);
+    }
+
 }
