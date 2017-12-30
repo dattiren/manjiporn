@@ -43,4 +43,6 @@ DB_USERNAME=root
 ```
 
 ### 注意事項
+
 php artisanコマンドは**manjiporn直下**じゃなきゃ動かないよ
+
