@@ -1,0 +1,281 @@
+html {
+  width: 100%;
+  font-size: 62.5%;
+  font-family: "Nunito", sans-serif;
+  background-color: black;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+a:hover {
+  filter: alpha(opacity=50);
+  -moz-opacity: 0.5;
+  opacity: 0.5;
+}
+
+header {
+  height: 80px;
+  width: 100%;
+  background-color: #1b1b1b;
+}
+
+header .header-container {
+  width: 1024px;
+  height: 80px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media screen and (max-width: 1024px) {
+  header .header-container {
+    width: 100%;
+  }
+}
+
+header .header-container .header-container-logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+  header .header-container .header-container-logo {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  header .header-container .header-container-logo {
+    width: 45%;
+  }
+}
+
+header .header-container .header-container-logo img {
+  width: 300px;
+}
+
+@media screen and (max-width: 1024px) {
+  header .header-container .header-container-logo img {
+    width: 100%;
+  }
+}
+
+header .header-container .header-container-searchform {
+  width: 380px;
+  height: 100%;
+  margin-left: 20px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+  header .header-container .header-container-searchform {
+    width: 50%;
+  }
+}
+
+header .header-container .header-container-searchform input[type="text"] {
+  width: 380px;
+  height: 50px;
+  right: 0;
+  border: none;
+  border-radius: 10px;
+  position: absolute;
+  font-size: 2.0rem;
+}
+
+@media screen and (max-width: 1024px) {
+  header .header-container .header-container-searchform input[type="text"] {
+    width: 100%;
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  header .header-container .header-container-searchform input[type="text"] {
+    height: 30px;
+  }
+}
+
+header .header-container .header-container-searchform button[type="submit"] {
+  height: 30px;
+  width: 30px;
+  right: 10px;
+  position: absolute;
+  background-image: url("/searchbtn.svg");
+  background-color: #fff;
+  border: none;
+  background-size: cover;
+}
+
+@media screen and (max-width: 1024px) {
+  header .header-container .header-container-searchform button[type="submit"] {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  header .header-container .header-container-searchform button[type="submit"] {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+header .header-container .header-container-create,
+header .header-container .header-container-login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 140px;
+  height: 80px;
+  border-left: 1px solid #5a5a5a;
+  text-decoration: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 2.0rem;
+}
+
+@media screen and (max-width: 1024px) {
+  header .header-container .header-container-create,
+  header .header-container .header-container-login {
+    width: 10%;
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  header .header-container .header-container-create,
+  header .header-container .header-container-login {
+    display: none;
+  }
+}
+
+header .header-container .header-container-create {
+  margin-left: 25px;
+}
+
+header .header-container .header-container-login {
+  border-right: 1px solid #5a5a5a;
+}
+
+.adminContainer {
+  width: 100%;
+  margin: 30px auto 0 auto;
+  overflow: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .adminContainer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin: 0;
+  }
+}
+
+.adminContainer .adminContainer-senctions {
+  width: 100%;
+}
+
+.adminContainer .adminContainer-senctions .adminContainer-sections-one {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .adminContainer .adminContainer-senctions .adminContainer-sections-one {
+    margin-top: 10px;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+}
+
+.adminContainer .adminContainer-senctions .adminContainer-sections-one h1 {
+  font-size: 3.0rem;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  margin: 0;
+  padding-left: 20px;
+  background-color: #1b1b1b;
+}
+
+@media screen and (max-width: 767px) {
+  .adminContainer .adminContainer-senctions .adminContainer-sections-one h1 {
+    background-color: #2b2b2b;
+    font-size: 2.0rem;
+    margin-bottom: 5px;
+    padding: 5px;
+    line-height: normal;
+    height: auto;
+    text-align: center;
+  }
+}
+
+.adminContainer .adminContainer-senctions .adminContainer-sections-one .adminContainer-sections-one-playback {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+
+.adminContainer .adminContainer-senctions .adminContainer-sections-one .adminContainer-sections-one-playback iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.adminContainer .adminContainer-senctions .adminContainer-sections-one .adminContainer-sections-one-playback-info {
+  width: 100%;
+}
+
+.adminContainer .adminContainer-senctions .adminContainer-sections-one .adminContainer-sections-one-playback-info textarea {
+  width: 100%;
+  font-size: 1.8rem;
+  padding: 10px;
+  margin: 0;
+}
+
+.adminContainer .adminContainer-senctions .adminContainer-sections-one .adminContainer-sections-one-playback-info .adminContainer-sections-one-playback-info-category label {
+  font-size: 2.0rem;
+  display: inline-block;
+}
+
+.adminContainer .adminContainer-senctions .adminContainer-sections-one .adminContainer-sections-one-playback-info .adminContainer-sections-one-playback-info-actress label {
+  font-size: 2.0rem;
+  display: inline-block;
+}
+

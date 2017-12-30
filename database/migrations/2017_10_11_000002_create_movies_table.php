@@ -26,6 +26,7 @@ class CreateMoviesTable extends Migration
             $table->mediumIncrements('id');
             $table->string('title', 255);
             $table->string('url', 255);
+            $table->string('thumbnail_url', 255);
             $table->integer('played_count')
                     ->unsigned()
                     ->default(1);
