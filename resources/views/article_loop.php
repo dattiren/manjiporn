@@ -26,7 +26,7 @@ if($CAT){
 					<div class="container-sections-one-movie-info-category">
 					<?php $categories =  $Myclass->getCategoriesByMovieId($movie->id);?>
 						<?php foreach($categories as $category):?>
-							<a href="#"><?php echo $category; ?></a>
+							<a href="/category?category_id=<?php echo $category->id;?>"><?php echo $category->name; ?></a>
 						<?php endforeach;?>
 					</div>
 				</div>
