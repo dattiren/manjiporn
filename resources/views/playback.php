@@ -32,7 +32,7 @@
 					</div>
 					<div class="container-sections-one-playback-category">
 					<?php foreach($categories as $category): ?>
-						<a><?php echo $category; ?></a>
+						<a href="/category?category_id=<?php echo $category->id;?>"><?php echo $category->name; ?></a>
 					<?php endforeach; ?>
 					</div>
 					<div class="container-sections-one-playback-report">

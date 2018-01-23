@@ -4,9 +4,9 @@ use DB;
 class MyClass{
 
     public function getCategoriesByMovieId($movie_id){
-      $categories = DB::table('movies_categories')
+      $categories = DB::table('movies_categories')->select('categories.id','categories.name')
         ->leftJoin('categories', 'movies_categories.category_id', '=', 'categories.id')
-        ->where('movies_categories.movie_id', $movie_id )->pluck('categories.name');
+        ->where('movies_categories.movie_id', $movie_id )->get();
       return $categories;
     }
 
