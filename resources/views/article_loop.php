@@ -2,6 +2,8 @@
 $Myclass = new App\MyLibs\MyClass;
 if($CAT){
 	$movies = $Myclass->getMoviesByCat($category_id);
+}elseif(isset($SEARCH)){
+	$movies = $Myclass->getMoviesByIdList($movie_id_list);
 }else{
 	$movies = $Myclass->getNewMovies();
 }

@@ -25,6 +25,7 @@ Route::get('/movie', 'PlaybackController@index');
 
 Route::get('/category', 'HomeController@category');
 
+Route::get('/search', 'HomeController@search');
 
 Route::get('/signin', function () {
     return view('login');

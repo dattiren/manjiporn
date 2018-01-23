@@ -27,8 +27,19 @@ class MyClass{
         ->select('movies.id','movies.title', 'movies.url', 'movies.played_count')
         ->where('movies_categories.category_id', $category_id )
         ->limit(12)->get();
-
         return $movies;
+    }
+
+    public function getMoviesByIdList($movie_ids){
+      $movies;
+      foreach($movie_ids as $movie_id){
+        $movies[] = DB::table('movies')->leftJoin('movies_categories', 'movies.id', '=', 'movies_categories.movie_id')
+        ->select('movies.id','movies.title', 'movies.url', 'movies.played_count')
+        ->where('movies.id', $movie_id )
+        ->first();
+      }
+      return $movies;
+    
     }
 
 }

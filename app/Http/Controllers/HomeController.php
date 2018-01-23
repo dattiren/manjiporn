@@ -21,4 +21,13 @@ class HomeController extends Controller
       return view('index',['CAT'=>$CAT,'category_id'=>$request->input('category_id')]);
     }
 
+    public function search(Request $request)
+    {
+      $CAT = false;
+      $SEARCH = true;
+      $movie_id_list = DB::table('movies')->where('title','like', '%'.$request->input('keyword').'%' )->pluck('id');
+      return view('index',['CAT'=>$CAT,'SEARCH'=>$SEARCH,'movie_id_list'=>$movie_id_list]);
+      
+    }
+
 }
