@@ -2,7 +2,7 @@
 		<div class="footcontainer">
             <div class="footcontainer-one">
                 <p>information</p>
-                <a href="use_info.php">About us</a>
+                <a href="/info">About us</a>
                 <a href="contact.php">Contact us</a>
                 <a href="use_info.php">privacy policy</a>
                 <a href="register.php">Register</a>
