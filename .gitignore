@@ -15,4 +15,5 @@ yarn-error.log
 .env
 package-lock.json
 *.css.map
-
+composer.lock
+composer.json

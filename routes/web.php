@@ -13,9 +13,10 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/contactus', function () {
-    return view('contact');
-});
+Route::get('/contactus', 'ContactController@form');
+
+Route::post('/contactus/confirm', 'ContactController@confirm');
+Route::post('/contactus/complete', 'ContactController@process');
 
 Route::get('/info', function () {
     return view('use_info');

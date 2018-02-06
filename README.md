@@ -3,6 +3,10 @@
 ## Version
 Laravel v5.5.14 (stable at 2017/10/09)
 
+## 2018/2/7
+.envの
+MAILDRIVER=smtpをsendmailに書き換える。
+
 ## 2017/10/22
 
 ## Usage
