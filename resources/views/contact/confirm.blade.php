@@ -12,13 +12,18 @@
 
     <div class="container">
         <h1 class="container-singletitle">Contact form</h1>
+        <p>If the following information is correct then press the "submit" button.</p>
         <div class="container-contact">
             <form action="{{action('ContactController@process')}}" method="POST">
                 {!! csrf_field() !!}
-                Name:{{$contact->name}}</br>
-                E-mail:{{$contact->email}}</br>
-                Subject:{{$contact->subject}}</br>
-                Comments:{{$contact->comments}}</br>
+                <label for="name">Name</label>
+                {{$contact->name}}</br>
+                <label for="email">E-mail</label>
+                {{$contact->email}}</br>
+                <label for="subject">Subject</label>
+                {{$contact->subject}}</br>
+                <label for="comments">Comments</label>
+                {{$contact->comments}}</br>
                 @foreach($contact->getAttributes() as $key => $value)
                 <input type="hidden" name="{{$key}}" value="{{$value}}">
                 @endforeach
