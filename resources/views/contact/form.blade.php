@@ -13,11 +13,9 @@
     <div class="container">
         <h1 class="container-singletitle">Contact form</h1>
         @if ($errors->any())
-        <ul>
             @foreach ($errors->all() as $error)
-                {{ $error }}</br>
+                <p>{{ $error }}</p>
             @endforeach
-        </ul>
         @endif
         <div class="container-contact">
             <form action="{{action('ContactController@confirm')}}" method="POST">

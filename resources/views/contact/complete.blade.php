@@ -11,7 +11,7 @@
 @include('header')
 
     <div class="container">
-        Your message was successfully sent.
+        <p>Your message was successfully sent.</p>
     </div>
 
     <div class="adsence"></div>

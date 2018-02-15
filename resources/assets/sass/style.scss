@@ -27,6 +27,9 @@ html {
     background-color: $background_color;
     color: $font_color;
 }
+p {
+    font-size: 1.7rem;
+}
 
 a {
     text-decoration: none;
@@ -37,6 +40,7 @@ a {
         opacity: 0.5;
     }
 }
+
 
 header {
     height: 80px;
